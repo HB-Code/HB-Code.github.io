@@ -1,0 +1,101 @@
+#!/data/data/com.termux/files/usr/bin/bash
+# Copyright 2020 HackBeast
+function banner () {
+ clear
+ echo -e "\e[30;101m Youtube Downloader \e[30;107m © 2020 HackBeast \033[0m"
+ echo ""
+}
+function download () {
+ echo "Downloading ...."
+ sleep 2
+}
+function brk () {
+ if [ $? -eq 0 ]; then
+    echo "Successfully Downloaded."
+else
+    echo "Download Failed"
+fi
+sleep 4
+exit 1
+}
+while [[ true ]]; do
+banner
+echo "Select a video resolution to download:"
+echo "[1] Audio Only."
+echo "[2] 480P Video."
+echo "[3] 720P Video."
+echo "[4] 1080P Video."
+echo "[5] 2K Video."
+echo "[6] 4K Video."
+echo "[7] Download best available quality."
+echo "[8] Show list of best available quality."
+
+command='-no-mtime -o /data/data/com.termux/files/home/storage/shared/Youtube/%(title)s.%(ext)s'
+read option
+
+if [ "$option" -eq "1" ]
+then
+    banner
+    download
+    echo "$command \"-f bestaudio[ext=m4a]\"" > ~/.config/youtube-dl/config
+    youtube-dl $1
+    brk
+elif [ "$option" -eq "2" ]
+then
+    banner
+    download
+    echo "$command \"-f bestvideo[height<=480]+bestaudio[ext=m4a]/bestvideo+bestaudio --merge-output-format mp4\"" > ~/.config/youtube-dl/config
+    youtube-dl $1
+    brk
+elif [ "$option" -eq "3" ]
+then
+    banner
+    download
+    echo "$command \"-f bestvideo[height<=720]+bestaudio[ext=m4a]/bestvideo+bestaudio --merge-output-format mp4\"" > ~/.config/youtube-dl/config
+    youtube-dl $1
+    brk
+elif [ "$option" -eq "4" ]
+then
+    banner
+    download
+    echo "$command \"-f bestvideo[height<=1080]+bestaudio[ext=m4a]/bestvideo+bestaudio --merge-output-format mp4\"" > ~/.config/youtube-dl/config
+    youtube-dl $1
+    brk
+elif [ "$option" -eq "5" ]
+then
+    banner
+    download
+    echo "$command \"-f bestvideo[height<=1440]+bestaudio[ext=m4a]/bestvideo+bestaudio --merge-output-format mp4\"" > ~/.config/youtube-dl/config
+    youtube-dl $1
+    brk
+elif [ "$option" -eq "6" ]
+then
+    banner
+    download
+    echo "$command \"-f bestvideo[height<=2160]+bestaudio[ext=m4a]/bestvideo+bestaudio --merge-output-format mp4\"" > ~/.config/youtube-dl/config
+    youtube-dl $1
+    brk
+elif [ "$option" -eq "7" ]
+then
+    banner
+    download
+    echo "$command \"-f bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio --merge-output-format mp4\"" > ~/.config/youtube-dl/config
+    youtube-dl $1
+    brk
+elif [ "$option" -eq "8" ]
+then
+    banner
+    echo "$command \"-F\"" > ~/.config/youtube-dl/config
+    youtube-dl $1
+    echo ""
+    read -p "Enter the format code (video+audio) which you want to download: " fcode
+    banner
+    download
+    echo "$command \"-f $fcode\"" > ~/.config/youtube-dl/config
+    youtube-dl $1
+    brk
+else
+    echo -e "\e[91mWrong input! \e[0mPlease enter a valid option."
+    sleep 2
+fi
+done
