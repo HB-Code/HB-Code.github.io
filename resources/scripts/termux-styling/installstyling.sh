@@ -21,4 +21,8 @@ apt-get install ncurses-utils wget curl figlet ruby pv git -y
 clear
 echo -e "\033[1;32m[*]\033[0m Installing termux-styling. Coded by \033[1;32mHackabeast\033[0m... \n"
 sleep 3
-bash <(curl -s https://HB-Code.github.io/resources/scripts/termux-styling/styling.sh)
+wget https://HB-Code.github.io/resources/scripts/termux-styling/styling.sh 
+chmod +x styling.sh
+./styling.sh
+rm styling.sh
+clear
