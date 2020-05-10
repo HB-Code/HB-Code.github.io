@@ -2,6 +2,5 @@ wheel
 pillow
 requests
 colorama
-seedtest-cli
-pcrypto
+speedtest-cli
 virtualenv
