@@ -37,7 +37,7 @@ else
 		error "ERROR: Unknown architecture."; echo; exit ;;
 	esac
 	prints "Downloading JDK-8 (~70Mb) for ${archname}..."
-	(axel --insecure --alternate "https://archive.org/download/openjdk-9-jre-headless_9.2017.8.20-1_arm/jdk8_${archname}.tar.gz") &> /dev/null;
+	wget https://archive.org/download/openjdk-9-jre-headless_9.2017.8.20-1_arm/jdk8_${archname}.tar.gz &> /dev/null;
 	prints "Moving JDK to system..."
 	mv jdk8_${archname}.tar.gz $PREFIX/share
 	prints "Extracting JDK..."
